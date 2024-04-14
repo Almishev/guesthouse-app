@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import './App.css'
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 import HeaderComponent from './components/HeaderComponent'
 import FooterComponent from './components/FooterComponent'
@@ -11,6 +13,10 @@ import { isUserLoggedIn } from './services/AuthService'
 import ListReservationComponent from './components/ListReservationComponent'
 import AvailableDaysComponent from './components/AvailableDaysComponent'
 import ReservationComponent from './components/ReservationComponent'
+import ListMessageComponent from './components/ListMessageComponent'
+import Home from './components/Home';
+import About from './components/About';
+import ContactUs from './components/ContactUs';
 
 function App() {
 
@@ -32,7 +38,16 @@ function App() {
         <HeaderComponent />
           <Routes>
               {/* http://localhost:8080 */}
-              <Route path='/' element = { <AvailableDaysComponent /> }></Route>
+              <Route path='/' element = { <Home /> }></Route>
+
+               {/* http://localhost:8080/home */} 
+               <Route path='/home' element = { <Home /> }></Route>
+
+                {/* http://localhost:8080/about */} 
+                <Route path='/about' element = { <About /> }></Route>
+
+                {/* http://localhost:8080/contact */} 
+                <Route path='/contact-us' element = { <ContactUs /> }></Route>
               
                {/* http://localhost:8080/reservations */}
                <Route path='/reservations' element = { 
@@ -43,16 +58,18 @@ function App() {
 
                {/* http://localhost:8080/add-reservation */}
                <Route path='/add-reservation' element = { 
-              <AuthenticatedRoute>
+             
                 <ReservationComponent />
-              </AuthenticatedRoute> 
+             
               }></Route>
                {/* http://localhost:8080/awailable-days */}
                <Route path='/available-days' element = { 
-              <AuthenticatedRoute>
+              
                 <AvailableDaysComponent />
-              </AuthenticatedRoute> 
+               
               }></Route>
+
+              <Route path='/messages' element = { <ListMessageComponent /> }></Route>
              
              
                {/* http://localhost:8080/register */}

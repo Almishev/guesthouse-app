@@ -43,6 +43,8 @@ public class SpringSecurityConfig {
 
                     authorize.requestMatchers("/api/auth/**").permitAll();
                     authorize.requestMatchers("/api/reservations/**").permitAll();
+                    authorize.requestMatchers("/api/contents/**").permitAll();
+                    authorize.requestMatchers("/api/messages/**").permitAll();
 
                     authorize.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll();
                     authorize.anyRequest().authenticated();

@@ -1,0 +1,48 @@
+.full-page-login {
+    background-image: url('../images/about.jpg'); 
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+.parallax {
+    margin-bottom: 120px;
+    background-image: url("images/room-6.jpg");
+    height: 500px; /* Adjust height as needed */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.parallax-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.social-icons {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.social-icons li {
+    display: inline-block;
+    margin: 0 10px;
+}
+
+.social-icons li a {
+    color: white;
+    font-size: 40px;
+}
+
+.social-icons li a:hover {
+    color: #ffcc00;
+}

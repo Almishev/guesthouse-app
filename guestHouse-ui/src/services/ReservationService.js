@@ -17,3 +17,5 @@ export const deleteReservation = (id) => axios.delete(BASE_REST_API_URL + '/' + 
   export const getAvailableDays = (startDate, endDate) => {
     return axios.get(`${BASE_REST_API_URL}/available-days?startDate=${startDate}&endDate=${endDate}`);
 };  
+
+

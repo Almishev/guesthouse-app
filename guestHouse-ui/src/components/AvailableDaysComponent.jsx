@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { getAvailableDays } from '../services/ReservationService';
-import axios from 'axios';
+import backgroundImg from '../images/about.jpg';
 
 const AvailableDaysComponent = () => {
     const [startDate, setStartDate] = useState('');
     const [endDate, setEndDate] = useState('');
     const [availableDays, setAvailableDays] = useState([]);
     const [error, setError] = useState('');
+    const [noAvailableDays, setNoAvailableDays] = useState(false);
 
     const handleGetAvailableDays = () => {
         if (!startDate || !endDate) {
@@ -14,11 +15,16 @@ const AvailableDaysComponent = () => {
             return;
         }
 
-        getAvailableDays(startDate, endDate) 
-        .then(response => {
-            setAvailableDays(response.data);
-            setError('');
-        })
+        getAvailableDays(startDate, endDate)
+            .then(response => {
+                const days = response.data;
+                if (days.length === 0) {
+                    setNoAvailableDays(true);
+                } else {
+                    setAvailableDays(days);
+                    setError('');
+                }
+            })
             .catch(error => {
                 console.error('Error fetching available days:', error);
                 setError('An error occurred while fetching available days.');
@@ -26,7 +32,7 @@ const AvailableDaysComponent = () => {
     };
 
     return (
-        <div className="container mt-5">
+        <div className="container mt-5" style={{ backgroundImage: `url(${backgroundImg})` , height: '700px' }}>
             <div className="row justify-content-center">
                 <div className="col-md-6">
                     <div className="card">
@@ -46,22 +52,35 @@ const AvailableDaysComponent = () => {
                     </div>
                 </div>
             </div>
-            <div className="row justify-content-center mt-4">
-                <div className="col-md-6">
-                    <div className="card">
-                        <div className="card-body">
-                            <h2 className="card-title">Available Days:</h2>
-                            <ul className="list-group">
-                                {availableDays.map((day, index) => (
-                                    <li key={index} className="list-group-item">{day}</li>
-                                ))}
-                            </ul>
+            {availableDays.length > 0 && !noAvailableDays && (
+                <div className="row justify-content-center mt-4">
+                    <div className="col-md-6">
+                        <div className="card">
+                            <div className="card-body">
+                                <h2 className="card-title">Available Days:</h2>
+                                <ul className="list-group">
+                                    {availableDays.map((day, index) => (
+                                        <li key={index} className="list-group-item">{day}</li>
+                                    ))}
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            )}
+            {noAvailableDays && (
+                <div className="row justify-content-center mt-4">
+                    <div className="col-md-6">
+                        <div className="alert alert-info" role="alert">
+                            No available days in the selected range.
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
 
 export default AvailableDaysComponent;
+
+
